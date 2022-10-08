@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project By Kameron Moshier</title>
+    <title>Hundy: A Coding Project By Kameron Moshier</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,13 +16,16 @@
         <link href="/css/site.css" rel="stylesheet">
         <link href="/css/prism.css" rel="stylesheet">
         <link rel="icon" type="image/png" href="/img/favicon-32x32.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column h-100">
     <!-- NAV SECTION -->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/index.html"><img src="/img/favicon-32x32.png" class="d-inline-block align-text-top" width="30" height="24"> APP NAME</a>
+        <a class="navbar-brand logoFont" href="/index.html"><img src="/img/favicon-32x32.png" class="d-inline-block align-text-top" width="30" height="24">Hundy</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -51,21 +54,87 @@
 <!--MAIN SECTION-->
 <main class="flex-shrink-0">
     <div class="container py-5 px-5 mt-5">
-        <h2 class="border-1 border-bottom border-dark">The Code for APP NAME</h2>
+        <h2 class="border-1 border-bottom border-dark">The Code for Hundy</h2>
         <div class="row row-cols-1 row-cols-md-2">
             <div class="col-md-8">
                 <pre class="line-numbers"><code class="language-javascript">
-                    //Call Hello World
-                    function helloWorld() {
-                        alert("hello World"); 
-                    }
+                    
+//get the values from the page
+//starts or controller function
+function getValues() {
+    //get values from the page
+    let startValue = document.getElementById("startValue").value
+    let endValue = document.getElementById("endValue").value 
+    
+
+    //We need to validate our input
+    //parse into Integers
+    startValue = parseInt(startValue); 
+    endValue = parseInt(endValue); 
+    
+    if(Number.isInteger(startValue) && Number.isInteger(endValue)) {
+        //we call generateNumbers
+        let numbers = generateNumbers(startValue, endValue)
+        //we call displayNumbers
+        displayNumbers(numbers);
+    }else {
+        alert("You must enter integers"); 
+    }
+    
+}
+
+//generate numbers from the startvalue to the endvalue
+//logic function(s)
+function generateNumbers(startValue, endValue) {
+
+    let numbers = [];
+
+    //we want to get all numbers from start to end
+
+    for(let i = startValue; i <= endValue; i++) {
+
+        //this will execute in a loop until i = endValue
+        numbers.push(i); 
+    }
+
+    return numbers; 
+}
+
+//display the numbers and mark even numbers bold
+//display or view functions
+function displayNumbers(numbers) {
+
+    let templateRows = ""
+
+    let className = "even"; 
+
+    for(let i = 0; i < numbers.length; i++) {
+
+        let number = numbers[i]
+        if(number % 2 == 0) {
+            className = "even"
+        }
+        else {
+            className = "odd"
+        }
+        //This does render correctly with Prisim see the source code in github.
+        templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+
+    }
+    document.getElementById("results").innerHTML = templateRows
+}
                 </code>
                 </pre>
             </div>
             <div class="col-md-4">
-                <p>The Code is structured in one function.</p>
-                <h5>Hello World</h5>
-                <p>Hello World is a function that displays an alert with a message of "Hello World".</p>
+                <p>The Code is structured in three functions.</p>
+                <h5>What each function does:</h5>
+                <p class="fw-bold mt-5 mb-1">getValues</p>
+                <p class="mt-1">The function called "getValues" declares two variables. "startValue" and "endValue". Each variable looks at the document where "site.js" has been embbeded and then uses "getElementById" to look at each element with Id definitions of "startValue" and "endValue". To prevent type conflicts, the "startValue" and "endValue" variables are converted from strings to integers. An "if" function also checks to make sure that letters are not being entered into the userform to prevent type errors. If only numbers are entered into the userform, then the "generateNumbers" function is called followed by the "displayNumbers" function.</p>
+                <p class="fw-bold mt-5 mb-1">generateNumbers</p>
+                <p class="mt-1">This function declares an array titled "numbers" and uses a "for" loop to populate the array.</p>
+                <p class="fw-bold mt-5 mb-1">displayNumbers</p>
+                <p class="mt-1">This function makes every even number in the "numbers" array bold. It then takes the array called "numbers" with bold text and inserts all numbers into the "innerHtml" of the element titled "results"</p>
             </div>
         </div>
     </div>

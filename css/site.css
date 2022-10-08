@@ -74,3 +74,15 @@ white-space: pre-wrap;
 word-break: break-all;
 word-wrap: break-word;
 }
+
+.logoFont {
+    font-family: 'Racing Sans One', cursive;
+}
+
+.odd {
+    font-weight: 100;
+}
+
+.even {
+    font-weight: bold;
+}   
